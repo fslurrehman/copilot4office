@@ -89,7 +89,7 @@ Contributors are welcome to enhance `copilot4office` by adding new features, imp
 
 ## Contributing
 
-To contribute to `copilot4office`, please fork the repository, make your changes, and submit a pull request. For more details, see the `CONTRIBUTING.md` file.
+To contribute to `copilot4office`, please fork the repository, make your changes, and submit a pull request. 
 
 ## TODO
 

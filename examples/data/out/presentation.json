@@ -1,0 +1,50 @@
+{
+    "slides": [
+        {
+            "title": "Title Slide",
+            "content": "Title: Innovative Business Ideas for 2024\nSubtitle: Unlocking New Opportunities\n"
+        },
+        {
+            "title": "Introduction Slide",
+            "content": "Brief overview of the importance of innovation in business.\nKey trends affecting business in 2024.\n"
+        },
+        {
+            "title": "Business Idea #1: Eco-Friendly Packaging Solutions",
+            "content": "Description: Business focused on biodegradable and sustainable packaging materials.\nTarget Market: Companies in the food industry, e-commerce, and retail.\nPotential Impact: Reduction in plastic waste, enhancement of brand image for clients.\n"
+        },
+        {
+            "title": "Business Idea #2: Remote Work Solutions",
+            "content": "Description: Providing tools and services that facilitate efficient remote working environments.\nTarget Market: Tech companies, startups, and educational institutions.\nPotential Impact: Increased productivity, cost savings on office spaces, and broader talent recruitment.\n"
+        },
+        {
+            "title": "Business Idea #3: Health and Wellness Apps",
+            "content": "Description: Apps that offer personalized health advice and virtual wellness coaching.\nTarget Market: Health-conscious individuals, corporate wellness programs.\nPotential Impact: Improved health outcomes, growth in subscription-based revenue models.\n"
+        },
+        {
+            "title": "Business Idea #4: Virtual Reality Experiences",
+            "content": "Description: Creating immersive virtual reality experiences for education, training, or entertainment.\nTarget Market: Schools, corporate training programs, entertainment sectors.\nPotential Impact: Enhanced learning and training efficacy, new entertainment paradigms.\n"
+        },
+        {
+            "title": "Conclusion Slide",
+            "content": "Summary of the presented business ideas.\nEncouragement to pursue these opportunities with innovative thinking and strategic planning.\n",
+            "imagelayout": [
+                1,
+                2
+            ],
+            "images": [
+                {
+                    "path": "fourier.jpg",
+                    "caption": "Fig. 1: Fourier Series"
+                },
+                {
+                    "path": "data\\in\\fourier_steps.jpg",
+                    "caption": "data\\in\\Fig. 2: Fourier Steps"
+                }
+            ]
+        },
+        {
+            "title": "Questions and Contact Information Slide",
+            "content": "Space for audience questions.\nContact information for further inquiries or collaboration.\n"
+        }
+    ]
+}

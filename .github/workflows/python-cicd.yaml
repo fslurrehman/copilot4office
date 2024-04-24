@@ -1,0 +1,79 @@
+name: Python CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Run Linting
+      run: |
+        pip install flake8
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Run unit test for presentation_creator
+      run: |
+        python -m unittest tests.test_presentation_creator
+
+    - name: Run unit test for presentation_processor
+      run: |
+        python -m unittest tests.test_presentation_processor
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install deployment dependencies
+      run: |
+        python -m pip install --upgrade setuptools wheel twine requests
+
+    - name: Check if new version
+      id: check_version
+      run: |
+        echo "Checking for new version..."
+        VERSION=$(python setup.py --version)
+        echo "Current version: $VERSION"
+        EXISTS=$(python -c "import requests; response = requests.get('https://pypi.org/pypi/copilot4office/json'); print('yes' if '$VERSION' in response.text else 'no')")
+        echo "Version exists on PyPI: $EXISTS"
+        if [[ "$EXISTS" == "no" ]]; then
+          echo "::set-output name=new_version::true"
+        else
+          echo "::set-output name=new_version::false"
+        fi
+
+    - name: Build and publish to PyPI
+      if: steps.check_version.outputs.new_version == 'true'
+      run: |
+        python setup.py sdist bdist_wheel
+        twine upload dist/* --verbose --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
+
+    - name: Create GitHub Release
+      if: steps.check_version.outputs.new_version == 'true'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.PYPI_TOKEN }}
